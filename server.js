@@ -2,8 +2,6 @@ const http = require('http');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const url = require('url');
-const querystring = require('querystring');
 
 const data = {
  "movies": [
@@ -447,10 +445,6 @@ const data = {
     ]
    }
 
-// const server = http.createServer((req, res) => {
-//   res.writeHead(200, {'Content-Type': 'application/json'});
-//   res.end(data?.movies?.[0]?.title);
-// });
 app.use(cors());
 
 app.get('/api/data', (req, res) => {
@@ -459,13 +453,9 @@ app.get('/api/data', (req, res) => {
 
 app.get('/api/data/:label',(req,res)=>{
   const params = req.params;
-  console.log("bindu",req?.params);
  const filteredData=  data?.movies?.filter((movie)=> movie?.label === params?.label);
- console.log("hello",filteredData?.length,data?.movies?.length);
   res.json(filteredData);
 })
-
-
 
 
 app.listen(4001, () => {
